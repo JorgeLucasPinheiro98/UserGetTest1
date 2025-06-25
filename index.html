@@ -49,26 +49,26 @@
                 helpButton.style.display = 'flex'; // Mostra o botão de ajuda
             });
         });
-                // example with attributes
-        window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-        email: 'user@awesome.com',
-        name: 'Awesome User',
-        created_at: 1644403436643,
-        })
-
-        // example with company attributes
-        window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-        name: 'Awesome User',
-        // id of company is required
-        company: {
-            id: '1',
-            name: 'Awesome Company',
+                    // example with attributes
+            window.userGuiding.identify('1Ax69i57j0j69i60l4', {
+            email: 'user@awesome.com',
+            name: 'Awesome User',
             created_at: 1644403436643,
-        }
-        })
+            })
 
-        // or just send userId without attributes
-        window.userGuiding.identify('1Ax69i57j0j69i60l4')
+            // example with company attributes
+            window.userGuiding.identify('1Ax69i57j0j69i60l4', {
+            name: 'Awesome User',
+            // id of company is required
+            company: {
+                id: '1',
+                name: 'Awesome Company',
+                created_at: 1644403436643,
+            }
+            })
+
+            // or just send userId without attributes
+            window.userGuiding.identify('1Ax69i57j0j69i60l4')
     </script>
 </body>
 </html>
