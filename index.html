@@ -1,13 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>  (function(g,u,i,d,e,s){g[e]=g[e]||[];var f=u.getElementsByTagName(i)[0];var k=u.createElement(i);k.async=true;k.src='https://static.userguiding.com/media/user-guiding-'+s+'-embedded.js';f.parentNode.insertBefore(k,f);if(g[d])return;var ug=g[d]={q:[]};ug.c=function(n){return function(){ug.q.push([n,arguments])};};var m=['previewGuide','finishPreview','track','identify','hideChecklist','launchChecklist'];for(var j=0;j<m.length;j+=1){ug[m[j]]=ug.c(m[j]);}})(window,document,'script','userGuiding','userGuidingLayer','MNK103338BXFID');
-    </script>
+    <title>Central de Ajuda Deslizante</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div >Teste</div>
+    <div class="header-container">
+        <button id="helpButton" class="menu-button">
+            <i class="fas fa-question"></i>
+        </button>
+    </div>
+
+    <div id="sidebar" class="sidebar">
+        <div class="sidebar-header">
+            <h3>Ajuda</h3>
+            <button id="closeSidebarButton" class="close-button">
+                <i class="fas fa-times"></i>
+            </button>
+            <embed src="" type="">
+        </div>
+    </div>
+
+    <div class="content-container">
+        <h1>Bem-vindo!</h1>
+        <p>Este é um exemplo de conteúdo centralizado na página.</p>
+        <p>Clique no botão de **ajuda** no canto superior direito para acessar nossa central de suporte.</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const helpButton = document.getElementById('helpButton'); // Mudança de nome: menuButton para helpButton
+            const sidebar = document.getElementById('sidebar');
+            const closeSidebarButton = document.getElementById('closeSidebarButton');
+
+            // Função para abrir a central de ajuda e esconder o botão
+            helpButton.addEventListener('click', function() {
+                sidebar.classList.add('active'); // Adiciona a classe para mostrar a sidebar
+                helpButton.style.display = 'none'; // Esconde o botão de ajuda
+            });
+
+            // Função para fechar a central de ajuda e mostrar o botão
+            closeSidebarButton.addEventListener('click', function() {
+                sidebar.classList.remove('active'); // Remove a classe para esconder a sidebar
+                helpButton.style.display = 'flex'; // Mostra o botão de ajuda
+            });
+        });
+    </script>
 </body>
 </html>
