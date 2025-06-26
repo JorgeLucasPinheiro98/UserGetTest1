@@ -21,18 +21,20 @@
             <button id="closeSidebarButton" class="close-button">
                 <i class="fas fa-times"></i>
             </button>
-            <embed src="" type="">
         </div>
+        <button id="inicial_Tur">
+            clique aqui para iniciar seu tur
+        </button>
     </div>
 
     <div class="content-container">
         <h1>Bem-vindo!</h1>
-        <p>Este é um exemplo de conteúdo centralizado na página.</p>
-        <p>Clique no botão de **ajuda** no canto superior direito para acessar nossa central de suporte.</p>
+        <p>Clique no botão de ajuda no canto superior direito para acessar nossa central de suporte.</p>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const turButton = document.getElementById('inicial_Tur')
             const helpButton = document.getElementById('helpButton'); // Mudança de nome: menuButton para helpButton
             const sidebar = document.getElementById('sidebar');
             const closeSidebarButton = document.getElementById('closeSidebarButton');
@@ -48,33 +50,36 @@
                 sidebar.classList.remove('active'); // Remove a classe para esconder a sidebar
                 helpButton.style.display = 'flex'; // Mostra o botão de ajuda
             });
-        });
-                    // example with attributes
-            window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-            email: 'user@awesome.com',
-            name: 'Awesome User',
-            created_at: 1644403436643,
-            })
 
-            // example with company attributes
-            window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-            name: 'Awesome User',
-            // id of company is required
-            company: {
-                id: '1',
-                name: 'Awesome Company',
-                created_at: 1644403436643,
-            }
-            })
+             // or just send userId without attributes
+            
 
-            // or just send userId without attributes
             window.userGuiding.identify('1Ax69i57j0j69i60l4')
-helpButton.addEventListener('click', function() {
-  sidebar.classList.add('active');
-  helpButton.style.display = 'none';
-  // Dispara um tutorial do UserGuiding ao abrir a central de ajuda
-  window.userGuiding.previewGuide('SEU_GUIDE_ID_AQUI');
-});
+            turButton.addEventListener('click', function() {
+            // Dispara um tutorial do UserGuiding ao abrir a central de ajuda
+            window.userGuiding.previewGuide('SEU_GUIDE_ID_AQUI');
+            });
+
+        });
+
+        // example with attributes
+        window.userGuiding.identify('1Ax69i57j0j69i60l4', {
+        email: 'user@awesome.com',
+        name: 'Awesome User',
+        created_at: 1644403436643,
+        })
+
+        // example with company attributes
+        window.userGuiding.identify('1Ax69i57j0j69i60l4', {
+        name: 'Awesome User',
+        // id of company is required
+        company: {
+            id: '1',
+            name: 'Awesome Company',
+            created_at: 1644403436643,
+        }
+        })
+
     </script>
 </body>
 </html>

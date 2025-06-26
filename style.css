@@ -121,3 +121,10 @@ body {
     /* Remover a transição de margin-left, já que a sidebar não empurrará o conteúdo */
     /* Se quisesse empurrar, teria que adicionar margin-right no content-container */
 }
+
+#inicial_Tur {
+    display: block;
+    padding: 7px;
+    margin: auto;
+    margin-top: 10px;
+}
