@@ -56,7 +56,7 @@
 
             window.userGuiding.identify('1Ax69i57j0j69i60l4')
             turButton.addEventListener('click', function() {
-            // Dispara um tutorial do UserGuiding ao abrir a central de ajuda
+            // Dispara um tutorial do UserGuiding ao clicar nas opções de ajuda
             window.userGuiding.previewGuide(146812);
             });
 
@@ -64,21 +64,24 @@
 
         // example with attributes
         window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-        email: 'user@awesome.com',
-        name: 'Awesome User',
+        email: 'jorge.oliveira@grupoitss.com.br',
+        name: 'Jorge Lucas',
         created_at: 1644403436643,
         })
 
         // example with company attributes
         window.userGuiding.identify('1Ax69i57j0j69i60l4', {
-        name: 'Awesome User',
+        name: 'Jorge Lucas',
         // id of company is required
         company: {
             id: '1',
-            name: 'Awesome Company',
+            name: 'Grupo Itss',
             created_at: 1644403436643,
         }
         })
+
+        // or just send userId without attributes
+        window.userGuiding.identify('1Ax69i57j0j69i60l4')
 
     </script>
 </body>
