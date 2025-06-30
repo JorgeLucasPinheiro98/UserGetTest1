@@ -25,11 +25,11 @@
         <button id="inicial_Tur">
             Guia Integrado por codigo fonte
         </button>
-        <a href="https://jorgelucaspinheiro98.github.io/UserGetTest1/?__ug__=146890">
+        <!-- <a href="https://jorgelucaspinheiro98.github.io/UserGetTest1/?__ug__=146890">
             <button id="inicial_Tur">
                 Guia Integrado por link
             </button>
-        </a>
+        </a> -->
         
     </div>
 
@@ -74,28 +74,28 @@
             window.userGuiding.previewGuide(146890);
             });
 
-        // example with attributes
-        window.userGuiding.identify(randomID, {
-        email,
-        name,
-        created_at: date,
-        })
+            // example with attributes
+            window.userGuiding.identify(randomID, {
+            email,
+            name,
+            created_at: date,
+            })
 
-        // example with company attributes
-        window.userGuiding.identify(randomID, {
-        name,
-        // id of company is required
-        company: {
-        id: '1',
-        name: 'Awesome Company',
-        created_at: date,
-        }
-        })
+            // example with company attributes
+            window.userGuiding.identify(randomID, {
+            name,
+            // id of company is required
+            company: {
+            id: '1',
+            name: 'Awesome Company',
+            created_at: date,
+            }
+            })
 
-        // or just send userId without attributes
-        window.userGuiding.identify(randomID)
+            // or just send userId without attributes
+            window.userGuiding.identify(randomID)
 
-        });
+            });
         
     </script>
 </body>
