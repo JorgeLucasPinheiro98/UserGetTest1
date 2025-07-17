@@ -3,10 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central de Ajuda Deslizante</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Testes da API UserGuiding</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script>  (function(g,u,i,d,e,s){g[e]=g[e]||[];var f=u.getElementsByTagName(i)[0];var k=u.createElement(i);k.async=true;k.src='https://static.userguiding.com/media/user-guiding-'+s+'-embedded.js';f.parentNode.insertBefore(k,f);if(g[d])return;var ug=g[d]={q:[]};ug.c=function(n){return function(){ug.q.push([n,arguments])};};var m=['previewGuide','finishPreview','track','identify','hideChecklist','launchChecklist'];for(var j=0;j<m.length;j+=1){ug[m[j]]=ug.c(m[j]);}})(window,document,'script','userGuiding','userGuidingLayer','XE91034204VRID');</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="number"], input[type="text"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            background-color: #004085;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffeeba;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+            color: #664d03;
+            border-radius: 4px;
+        }
+        code {
+            background-color: #e9e9e9;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .log-output {
+            background-color: #e2e2e2;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        /* Estilos para sua central de ajuda deslizante */
+        .header-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .menu-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px; /* Esconde a sidebar inicialmente */
+            width: 300px;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+            transition: right 0.3s ease-in-out;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar.active {
+            right: 0; /* Mostra a sidebar */
+        }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .sidebar-header h3 {
+            margin: 0;
+            color: #333;
+        }
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #333;
+            cursor: pointer;
+        }
+        .close-button:hover {
+            color: #007bff;
+        }
+        .content-container {
+            margin-top: 80px; /* Espaço para o botão de ajuda fixo */
+        }
+    </style>
+
+    <script>
+        (function(g,u,i,d,e,s){g[e]=g[e]||[];var f=u.getElementsByTagName(i)[0];var k=u.createElement(i);k.async=true;k.src='https://static.userguiding.com/media/user-guiding-'+s+'-embedded.js';f.parentNode.insertBefore(k,f);if(g[d])return;var ug=g[d]={q:[]};ug.c=function(n){return function(){ug.q.push([n,arguments])};};var m=['previewGuide','finishPreview','track','identify','hideChecklist','launchChecklist','launchResourceCenter','hideResourceCenter','expandResourceCenter','collapseResourceCenter','getChecklistCompletionInfo','launchSurvey','hideSurvey','launchProductUpdates','hideProductUpdates','launchKnowledgeBase','hideKnowledgeBase','launchAiAssistant','hideAiAssistant','expandAiAssistant','collapseAiAssistant','forceIdentify','page'];for(var j=0;j<m.length;j+=1){ug[m[j]]=ug.c(m[j]);}})(window,document,'script','userGuiding','userGuidingLayer','DRM102499AFBID');
+    </script>
 </head>
 <body>
     <div class="header-container">
@@ -22,81 +170,529 @@
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <button id="inicial_Tur">
-            Guia Integrado por codigo fonte
+        <button id="triggerGuideButton">
+            Guia Integrado por Código
         </button>
-        <!-- <a href="https://jorgelucaspinheiro98.github.io/UserGetTest1/?__ug__=146890">
-            <button id="inicial_Tur">
-                Guia Integrado por link
-            </button>
-        </a> -->
-        
+        <button id="triggerChecklistButton">
+            Acionar Checklist
+        </button>
+        <button id="triggerResourceCenterButton">
+            Acionar Central de Recursos
+        </button>
+        <button id="triggerSurveyButton">
+            Acionar Pesquisa
+        </button>
+        <button id="triggerProductUpdatesButton">
+            Acionar Atualizações de Produto
+        </button>
+        <button id="triggerKnowledgeBaseButton">
+            Acionar Base de Conhecimento
+        </button>
+        <button id="triggerAiAssistantButton">
+            Acionar Assistente de IA
+        </button>
+        <button onclick="getChecklistCompletionInfo()">
+            Obter Info. Conclusão Checklist
+        </button>
     </div>
 
-    <div class="content-container">
+    <div class="container">
         <h1>Bem-vindo!</h1>
-        <p>Test de Integração 01</p>
-        <p>Clique no botão de ajuda no canto superior direito para acessar nossa central de suporte.</p>
+        <p>Teste de Integração 01 - UserGuiding</p>
+        <p>Clique no botão de ajuda no canto superior direito para acessar nossa central de suporte e testar as integrações.</p>
+        <p class="note">
+            Abra o **Console do Desenvolvedor** (F12 no Chrome/Firefox) para ver as saídas detalhadas dos eventos da UserGuiding.
+            As mensagens também serão logadas abaixo:
+        </p>
+        <div id="logOutput" class="log-output">
+            </div>
+
+        <hr>
+
+        <h2>Testes Diretos da API UserGuiding</h2>
+        <div class="section">
+            <h3>Identificação de Usuário</h3>
+            <label for="userIdInput">ID do Usuário:</label>
+            <input type="text" id="userIdInput" value="user_TESTE_123">
+            <label for="userNameInput">Nome:</label>
+            <input type="text" id="userNameInput" value="Testador UserG">
+            <label for="userEmailInput">Email:</label>
+            <input type="text" id="userEmailInput" value="testador@userg.com">
+            <label for="companyIdInput">ID da Empresa:</label>
+            <input type="text" id="companyIdInput" value="comp_XYZ">
+            <label for="companyNameInput">Nome da Empresa:</label>
+            <input type="text" id="companyNameInput" value="Empresa Teste XYZ">
+            <button onclick="manualIdentifyUser()">Identificar Usuário Manualmente</button>
+            <button onclick="forceIdentifyUser()">Forçar Re-identificação</button>
+            <p><strong>Dica:</strong> Altere os valores e clique em "Identificar Usuário Manualmente" para ver a atualização.</p>
+        </div>
+
+        <div class="section">
+            <h3>Controle de Guias</h3>
+            <label for="guideIdInput">ID do Guia:</label>
+            <input type="number" id="guideIdInput" value="146936">
+            <button onclick="manualTriggerGuide()">Acionar Guia (ID Específico)</button>
+            <button onclick="finishCurrentGuide()">Finalizar Guia Atual</button>
+        </div>
+
+        <div class="section">
+            <h3>Controle de Checklists</h3>
+            <label for="checklistIdInput">ID do Checklist:</label>
+            <input type="number" id="checklistIdInput" value="5678"> <button onclick="manualLaunchChecklist()">Acionar Checklist (ID Específico)</button>
+            <button onclick="hideCurrentChecklist()">Esconder Checklist Atual</button>
+            <button onclick="expandCurrentChecklist()">Expandir Checklist Atual</button>
+            <button onclick="collapseCurrentChecklist()">Reduzir Checklist Atual</button>
+        </div>
+
+        <div class="section">
+            <h3>Controle de Centrais de Recursos</h3>
+            <label for="resourceCenterIdInput">ID da Central de Recursos:</label>
+            <input type="number" id="resourceCenterIdInput" value="9012"> <button onclick="manualLaunchResourceCenter()">Acionar Central de Recursos (ID Específico)</button>
+            <button onclick="hideCurrentResourceCenter()">Esconder Central de Recursos Atual</button>
+            <button onclick="expandCurrentResourceCenter()">Expandir Central de Recursos Atual</button>
+            <button onclick="collapseCurrentResourceCenter()">Reduzir Central de Recursos Atual</button>
+        </div>
+
+        <div class="section">
+            <h3>Controle de Pesquisas</h3>
+            <label for="surveyIdInput">ID da Pesquisa:</label>
+            <input type="number" id="surveyIdInput" value="3456"> <button onclick="manualLaunchSurvey()">Acionar Pesquisa (ID Específico)</button>
+            <button onclick="hideCurrentSurvey()">Esconder Pesquisa Atual</button>
+        </div>
+
+        <div class="section">
+            <h3>Outras Funções</h3>
+            <button onclick="launchProductUpdates()">Acionar Atualizações de Produto</button>
+            <button onclick="hideProductUpdates()">Esconder Atualizações de Produto</button>
+            <button onclick="launchKnowledgeBase()">Acionar Base de Conhecimento</button>
+            <button onclick="hideKnowledgeBase()">Esconder Base de Conhecimento</button>
+            <button onclick="launchAiAssistant()">Acionar Assistente de IA</button>
+            <button onclick="hideAiAssistant()">Esconder Assistente de IA</button>
+            <button onclick="expandAiAssistant()">Expandir Assistente de IA</button>
+            <button onclick="collapseAiAssistant()">Reduzir Assistente de IA</button>
+        </div>
     </div>
 
     <script>
+        const logOutput = document.getElementById('logOutput');
+
+        function appendLog(message) {
+            const p = document.createElement('p');
+            p.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logOutput.prepend(p); // Adiciona no início para os mais recentes ficarem no topo
+            if (logOutput.children.length > 50) { // Limita o número de logs para não sobrecarregar
+                logOutput.removeChild(logOutput.lastChild);
+            }
+        }
+
+        // --- Callbacks de Eventos da UserGuiding ---
+        // Adicione esses callbacks para ver os eventos no console e na tela de log
+        window.userGuidingLayer.push({
+            event: 'onload',
+            fn: () => {
+                console.log('UserGuiding SDK loaded and API is ready!');
+                appendLog('UserGuiding SDK carregado e API pronta!');
+            }
+        });
+
+        window.userGuidingLayer.push({
+            event: 'onIdentificationComplete',
+            fn: (data) => {
+                console.log('onIdentificationComplete:', data);
+                appendLog(`Identificação completa para User ID: ${data.userStorage.user_id}`);
+            }
+        });
+
+        window.userGuidingLayer.push({
+            event: 'onPreviewStart',
+            fn: (data) => {
+                console.log('onPreviewStart:', data);
+                appendLog(`Guia ${data.guideId} iniciado.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onPreviewStep',
+            fn: (data) => {
+                console.log('onPreviewStep:', data);
+                appendLog(`Guia ${data.guideId} - Passo ${data.stepIndex} visualizado.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onPreviewEnd',
+            fn: (data) => {
+                console.log('onPreviewEnd:', data);
+                appendLog(`Guia ${data.guideId} finalizado. Completo: ${data.completed}`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onPreviewComplete',
+            fn: (data) => {
+                console.log('onPreviewComplete:', data);
+                appendLog(`Guia ${data.guideId} completado!`);
+            }
+        });
+
+        window.userGuidingLayer.push({
+            event: 'onHotspotInteract',
+            fn: (data) => {
+                console.log('onHotspotInteract:', data);
+                appendLog(`Hotspot ${data.hotspotId} interagido.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onHotspotDismiss',
+            fn: (data) => {
+                console.log('onHotspotDismiss:', data);
+                appendLog(`Hotspot ${data.hotspotId} dispensado.`);
+            }
+        });
+
+        window.userGuidingLayer.push({
+            event: 'onChecklistComplete',
+            fn: (data) => {
+                console.log('onChecklistComplete:', data);
+                appendLog(`Checklist ${data.checklistId} completado.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onChecklistItemTrigger',
+            fn: (data) => {
+                console.log('onChecklistItemTrigger:', data);
+                appendLog(`Item do Checklist ${data.checklistItemId} acionado.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onChecklistUrlClick',
+            fn: (data) => {
+                console.log('onChecklistUrlClick:', data);
+                appendLog(`Clique em URL do Checklist ${data.checklistId}, item ${data.checklistItemId}.`);
+            }
+        });
+        window.userGuidingLayer.push({
+            event: 'onChecklistDismiss',
+            fn: (data) => {
+                console.log('onChecklistDismiss:', data);
+                appendLog(`Checklist ${data.checklistId} dispensado.`);
+            }
+        });
+
+        // Callbacks para Central de Recursos, Pesquisas e outros
+        // (Similar aos exemplos de Guias e Checklists, adicione conforme necessário)
+        window.userGuidingLayer.push({ event: 'onResourceCenterGuideTrigger', fn: (data) => { console.log('onResourceCenterGuideTrigger:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - Guia ${data.guideId} acionado.`); } });
+        window.userGuidingLayer.push({ event: 'onResourceCenterSurveyTrigger', fn: (data) => { console.log('onResourceCenterSurveyTrigger:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - Pesquisa ${data.surveyId} acionada.`); } });
+        window.userGuidingLayer.push({ event: 'onResourceCenterChecklistGuideTrigger', fn: (data) => { console.log('onResourceCenterChecklistGuideTrigger:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - Checklist ${data.checklistId}, Guia ${data.guideId} acionado.`); } });
+        window.userGuidingLayer.push({ event: 'onResourceCenterChecklistUrlClick', fn: (data) => { console.log('onResourceCenterChecklistUrlClick:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - Checklist ${data.checklistId} URL clicada.`); } });
+        window.userGuidingLayer.push({ event: 'onResourceCenterArticleLinkClick', fn: (data) => { console.log('onResourceCenterArticleLinkClick:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - Artigo ${data.articleLink} clicado.`); } });
+        window.userGuidingLayer.push({ event: 'onResourceCenterExternalUrlClick', fn: (data) => { console.log('onResourceCenterExternalUrlClick:', data); appendLog(`Central de Rec. ${data.resourceCenterId} - URL Externa ${data.externalUrl} clicada.`); } });
+
+        window.userGuidingLayer.push({ event: 'onSurveyView', fn: (data) => { console.log('onSurveyView:', data); appendLog(`Pesquisa ${data.surveyId} visualizada.`); } });
+        window.userGuidingLayer.push({ event: 'onSurveyQuestionView', fn: (data) => { console.log('onSurveyQuestionView:', data); appendLog(`Pesquisa ${data.surveyId} - Pergunta ${data.questionId} visualizada.`); } });
+        window.userGuidingLayer.push({ event: 'onSurveyAnswer', fn: (data) => { console.log('onSurveyAnswer:', data); appendLog(`Pesquisa ${data.surveyId} - Resposta enviada para pergunta ${data.questionId}.`); } });
+
+
+        // --- Funções Auxiliares para Verificar o SDK ---
+        function isUserGuidingReady() {
+            if (typeof window.userGuiding === 'undefined') {
+                console.error("UserGuiding SDK não carregado. Verifique seu script de instalação e a ID da sua conta.");
+                appendLog("ERRO: UserGuiding SDK não carregado.");
+                return false;
+            }
+            return true;
+        }
+
+        // --- Funções de Acionamento dos Botões ---
+
+        // Funções da Sidebar (suas funções originais)
         document.addEventListener('DOMContentLoaded', function() {
-            const turButton = document.getElementById('inicial_Tur')
-            const helpButton = document.getElementById('helpButton'); // Mudança de nome: menuButton para helpButton
+            const helpButton = document.getElementById('helpButton');
             const sidebar = document.getElementById('sidebar');
             const closeSidebarButton = document.getElementById('closeSidebarButton');
-            const randomID = Math.floor(Math.random() * 1000000)
-            const email = window.prompt('Digite seu Email');
-            const name = window.prompt('Digite seu Nome');
-            const date = new Date()
+            const triggerGuideButton = document.getElementById('triggerGuideButton');
+            const triggerChecklistButton = document.getElementById('triggerChecklistButton');
+            const triggerResourceCenterButton = document.getElementById('triggerResourceCenterButton');
+            const triggerSurveyButton = document.getElementById('triggerSurveyButton');
+            const triggerProductUpdatesButton = document.getElementById('triggerProductUpdatesButton');
+            const triggerKnowledgeBaseButton = document.getElementById('triggerKnowledgeBaseButton');
+            const triggerAiAssistantButton = document.getElementById('triggerAiAssistantButton');
 
-                            
+            // Exemplo de identificação inicial do usuário com valores de input
+            manualIdentifyUser(); // Chama a identificação ao carregar a página
 
-            // Função para abrir a central de ajuda e esconder o botão
             helpButton.addEventListener('click', function() {
-
-                sidebar.classList.add('active'); // Adiciona a classe para mostrar a sidebar
-                helpButton.style.display = 'none'; // Esconde o botão de ajuda
+                sidebar.classList.add('active');
+                helpButton.style.display = 'none';
             });
 
-            // Função para fechar a central de ajuda e mostrar o botão
             closeSidebarButton.addEventListener('click', function() {
-                sidebar.classList.remove('active'); // Remove a classe para esconder a sidebar
-                helpButton.style.display = 'flex'; // Mostra o botão de ajuda
+                sidebar.classList.remove('active');
+                helpButton.style.display = 'flex';
             });
 
-             // or just send userId without attributes
-            
-
-            window.userGuiding.identify(randomID)
-            turButton.addEventListener('click', function() {
-            // Dispara um tutorial do UserGuiding ao clicar nas opções de ajuda
-            window.userGuiding.previewGuide(146890);
+            // Botões da sidebar para acionar UserGuiding
+            triggerGuideButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    const guideId = parseInt(document.getElementById('guideIdInput').value) || 146936; // Usa o ID do input ou um default
+                    console.log(`Acionando Guia ${guideId} da sidebar.`);
+                    appendLog(`Acionando Guia ${guideId} (via sidebar).`);
+                    window.userGuiding.previewGuide(guideId);
+                }
             });
 
-            // example with attributes
-            window.userGuiding.identify(randomID, {
-            email,
-            name,
-            created_at: date,
-            })
+            triggerChecklistButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    const checklistId = parseInt(document.getElementById('checklistIdInput').value) || 5678;
+                    console.log(`Acionando Checklist ${checklistId} da sidebar.`);
+                    appendLog(`Acionando Checklist ${checklistId} (via sidebar).`);
+                    window.userGuiding.launchChecklist(checklistId);
+                }
+            });
 
-            // example with company attributes
-            window.userGuiding.identify(randomID, {
-            name,
-            // id of company is required
-            company: {
-            id: '1',
-            name: 'Awesome Company',
-            created_at: date,
+            triggerResourceCenterButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    const resourceCenterId = parseInt(document.getElementById('resourceCenterIdInput').value) || 9012;
+                    console.log(`Acionando Central de Recursos ${resourceCenterId} da sidebar.`);
+                    appendLog(`Acionando Central de Recursos ${resourceCenterId} (via sidebar).`);
+                    window.userGuiding.launchResourceCenter(resourceCenterId);
+                }
+            });
+
+            triggerSurveyButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    const surveyId = parseInt(document.getElementById('surveyIdInput').value) || 3456;
+                    console.log(`Acionando Pesquisa ${surveyId} da sidebar.`);
+                    appendLog(`Acionando Pesquisa ${surveyId} (via sidebar).`);
+                    window.userGuiding.launchSurvey(surveyId);
+                }
+            });
+
+            triggerProductUpdatesButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    console.log('Acionando Atualizações de Produto da sidebar.');
+                    appendLog('Acionando Atualizações de Produto (via sidebar).');
+                    window.userGuiding.launchProductUpdates();
+                }
+            });
+
+            triggerKnowledgeBaseButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    console.log('Acionando Base de Conhecimento da sidebar.');
+                    appendLog('Acionando Base de Conhecimento (via sidebar).');
+                    window.userGuiding.launchKnowledgeBase();
+                }
+            });
+
+            triggerAiAssistantButton.addEventListener('click', function() {
+                if (isUserGuidingReady()) {
+                    console.log('Acionando Assistente de IA da sidebar.');
+                    appendLog('Acionando Assistente de IA (via sidebar).');
+                    window.userGuiding.launchAiAssistant();
+                }
+            });
+        });
+
+        // Funções para os botões de teste direto (fora da sidebar)
+        function manualIdentifyUser() {
+            if (!isUserGuidingReady()) return;
+
+            const userId = document.getElementById('userIdInput').value || `user_${Math.floor(Math.random() * 1000000)}`;
+            const userName = document.getElementById('userNameInput').value;
+            const userEmail = document.getElementById('userEmailInput').value;
+            const companyId = document.getElementById('companyIdInput').value;
+            const companyName = document.getElementById('companyNameInput').value;
+
+            const attributes = {
+                created_at: Date.now() // Adiciona um timestamp para rastreamento
+            };
+            if (userName) attributes.name = userName;
+            if (userEmail) attributes.email = userEmail;
+
+            if (companyId) {
+                attributes.company = { id: companyId };
+                if (companyName) attributes.company.name = companyName;
+                attributes.company.created_at = Date.now();
             }
-            })
 
-            // or just send userId without attributes
-            window.userGuiding.identify(randomID)
+            console.log(`Chamando userGuiding.identify(${userId}, ${JSON.stringify(attributes)}`);
+            appendLog(`Identificando usuário: ${userId}`);
+            window.userGuiding.identify(userId, attributes);
+        }
 
-            });
-        
+        function forceIdentifyUser() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.forceIdentify()");
+            appendLog("Forçando re-identificação de usuário.");
+            window.userGuiding.forceIdentify();
+        }
+
+        function manualTriggerGuide() {
+            if (!isUserGuidingReady()) return;
+            const guideId = parseInt(document.getElementById('guideIdInput').value);
+            if (isNaN(guideId)) {
+                alert("Por favor, insira um ID de Guia válido.");
+                return;
+            }
+            console.log(`Chamando userGuiding.previewGuide(${guideId})`);
+            appendLog(`Acionando Guia ${guideId}.`);
+            window.userGuiding.previewGuide(guideId);
+        }
+
+        function finishCurrentGuide() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.finishPreview()");
+            appendLog("Finalizando Guia atual.");
+            window.userGuiding.finishPreview();
+        }
+
+        function manualLaunchChecklist() {
+            if (!isUserGuidingReady()) return;
+            const checklistId = parseInt(document.getElementById('checklistIdInput').value);
+            if (isNaN(checklistId)) {
+                alert("Por favor, insira um ID de Checklist válido.");
+                return;
+            }
+            console.log(`Chamando userGuiding.launchChecklist(${checklistId})`);
+            appendLog(`Acionando Checklist ${checklistId}.`);
+            window.userGuiding.launchChecklist(checklistId);
+        }
+
+        function hideCurrentChecklist() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideChecklist()");
+            appendLog("Escondendo Checklist atual.");
+            window.userGuiding.hideChecklist();
+        }
+
+        function expandCurrentChecklist() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.expandChecklist()");
+            appendLog("Expandindo Checklist atual.");
+            window.userGuiding.expandChecklist();
+        }
+
+        function collapseCurrentChecklist() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.collapseChecklist()");
+            appendLog("Reduzindo Checklist atual.");
+            window.userGuiding.collapseChecklist();
+        }
+
+        function getChecklistCompletionInfo() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.getChecklistCompletionInfo()");
+            const info = window.userGuiding.getChecklistCompletionInfo();
+            console.log('Informações de Conclusão de Checklists:', info);
+            appendLog(`Info. Conclusão Checklist: ${JSON.stringify(info)}`);
+        }
+
+        function manualLaunchResourceCenter() {
+            if (!isUserGuidingReady()) return;
+            const resourceCenterId = parseInt(document.getElementById('resourceCenterIdInput').value);
+            if (isNaN(resourceCenterId)) {
+                alert("Por favor, insira um ID de Central de Recursos válido.");
+                return;
+            }
+            console.log(`Chamando userGuiding.launchResourceCenter(${resourceCenterId})`);
+            appendLog(`Acionando Central de Recursos ${resourceCenterId}.`);
+            window.userGuiding.launchResourceCenter(resourceCenterId);
+        }
+
+        function hideCurrentResourceCenter() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideResourceCenter()");
+            appendLog("Escondendo Central de Recursos atual.");
+            window.userGuiding.hideResourceCenter();
+        }
+
+        function expandCurrentResourceCenter() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.expandResourceCenter()");
+            appendLog("Expandindo Central de Recursos atual.");
+            window.userGuiding.expandResourceCenter();
+        }
+
+        function collapseCurrentResourceCenter() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.collapseResourceCenter()");
+            appendLog("Reduzindo Central de Recursos atual.");
+            window.userGuiding.collapseResourceCenter();
+        }
+
+        function manualLaunchSurvey() {
+            if (!isUserGuidingReady()) return;
+            const surveyId = parseInt(document.getElementById('surveyIdInput').value);
+            if (isNaN(surveyId)) {
+                alert("Por favor, insira um ID de Pesquisa válido.");
+                return;
+            }
+            console.log(`Chamando userGuiding.launchSurvey(${surveyId})`);
+            appendLog(`Acionando Pesquisa ${surveyId}.`);
+            window.userGuiding.launchSurvey(surveyId);
+        }
+
+        function hideCurrentSurvey() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideSurvey()");
+            appendLog("Escondendo Pesquisa atual.");
+            window.userGuiding.hideSurvey();
+        }
+
+        // Funções para Outras Funcionalidades
+        function launchProductUpdates() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.launchProductUpdates()");
+            appendLog("Acionando Atualizações de Produto.");
+            window.userGuiding.launchProductUpdates();
+        }
+
+        function hideProductUpdates() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideProductUpdates()");
+            appendLog("Escondendo Atualizações de Produto.");
+            window.userGuiding.hideProductUpdates();
+        }
+
+        function launchKnowledgeBase() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.launchKnowledgeBase()");
+            appendLog("Acionando Base de Conhecimento.");
+            window.userGuiding.launchKnowledgeBase();
+        }
+
+        function hideKnowledgeBase() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideKnowledgeBase()");
+            appendLog("Escondendo Base de Conhecimento.");
+            window.userGuiding.hideKnowledgeBase();
+        }
+
+        function launchAiAssistant() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.launchAiAssistant()");
+            appendLog("Acionando Assistente de IA.");
+            window.userGuiding.launchAiAssistant();
+        }
+
+        function hideAiAssistant() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.hideAiAssistant()");
+            appendLog("Escondendo Assistente de IA.");
+            window.userGuiding.hideAiAssistant();
+        }
+
+        function expandAiAssistant() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.expandAiAssistant()");
+            appendLog("Expandindo Assistente de IA.");
+            window.userGuiding.expandAiAssistant();
+        }
+
+        function collapseAiAssistant() {
+            if (!isUserGuidingReady()) return;
+            console.log("Chamando userGuiding.collapseAiAssistant()");
+            appendLog("Reduzindo Assistente de IA.");
+            window.userGuiding.collapseAiAssistant();
+        }
+
     </script>
 </body>
 </html>
