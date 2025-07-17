@@ -440,7 +440,7 @@
 
             triggerChecklistButton.addEventListener('click', function() {
                 if (isUserGuidingReady()) {
-                    const checklistId = parseInt(document.getElementById('checklistIdInput').value) || 5678;
+                    const checklistId = parseInt(document.getElementById('checklistIdInput').value) || 20202;
                     console.log(`Acionando Checklist ${checklistId} da sidebar.`);
                     appendLog(`Acionando Checklist ${checklistId} (via sidebar).`);
                     window.userGuiding.launchChecklist(checklistId);
@@ -449,7 +449,7 @@
 
             triggerResourceCenterButton.addEventListener('click', function() {
                 if (isUserGuidingReady()) {
-                    const resourceCenterId = parseInt(document.getElementById('resourceCenterIdInput').value) || 9012;
+                    const resourceCenterId = parseInt(document.getElementById('resourceCenterIdInput').value) || 5758;
                     console.log(`Acionando Central de Recursos ${resourceCenterId} da sidebar.`);
                     appendLog(`Acionando Central de Recursos ${resourceCenterId} (via sidebar).`);
                     window.userGuiding.launchResourceCenter(resourceCenterId);
